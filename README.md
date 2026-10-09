@@ -211,7 +211,7 @@ Includes complete bidirectional `hreflang` alternate links in HTML `<head>` and 
 Verified against Google Search Central guidelines with a **100/100 Perfect Technical SEO Score**:
 
 * **JSON-LD `@graph` Structured Data**:
-  * `SoftwareApplication`: Free offers ($0), AggregateRating (4.9 / 1,240 reviews), feature lists, and operating system properties.
+  * `SoftwareApplication`: Free offers ($0), feature lists, author attribution, and operating system properties.
   * `WebSite`: Canonical root entity with publisher organization and logo.
   * `BreadcrumbList`: Positioned crawl hierarchy.
   * `FAQPage`: Rich snippet FAQ accordions for audio specifications.
