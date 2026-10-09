@@ -1,0 +1,160 @@
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp');
+
+const svg = `
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="50%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#180306"/>
+    </linearGradient>
+    <radialGradient id="crimsonGlow" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#BC0202" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#830000" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#BC0202"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#FF0000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#crimsonGlow)"/>
+
+  <!-- Subtle Studio Grid Overlay -->
+  <g stroke="#222226" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Left Turntable Vinyl Deck A Background Graphic -->
+  <g transform="translate(130, 315)" opacity="0.32">
+    <circle r="210" fill="#080808" stroke="#2a2a2e" stroke-width="3"/>
+    <circle r="175" fill="none" stroke="#1a1a1e" stroke-width="2" stroke-dasharray="4,4"/>
+    <circle r="140" fill="none" stroke="#26262a" stroke-width="2"/>
+    <circle r="100" fill="none" stroke="#1a1a1e" stroke-width="1.5"/>
+    <circle r="65" fill="#830000" stroke="#ff0000" stroke-width="3"/>
+    <circle r="14" fill="#ffffff"/>
+  </g>
+
+  <!-- Right Turntable Vinyl Deck B Background Graphic -->
+  <g transform="translate(1070, 315)" opacity="0.32">
+    <circle r="210" fill="#080808" stroke="#2a2a2e" stroke-width="3"/>
+    <circle r="175" fill="none" stroke="#1a1a1e" stroke-width="2" stroke-dasharray="4,4"/>
+    <circle r="140" fill="none" stroke="#26262a" stroke-width="2"/>
+    <circle r="100" fill="none" stroke="#1a1a1e" stroke-width="1.5"/>
+    <circle r="65" fill="#BC0202" stroke="#ff0000" stroke-width="3"/>
+    <circle r="14" fill="#ffffff"/>
+  </g>
+
+  <!-- Top Badge -->
+  <g transform="translate(600, 95)">
+    <rect x="-190" y="-18" width="380" height="36" rx="18" fill="#18181b" stroke="#BC0202" stroke-width="1.5"/>
+    <circle cx="-162" cy="0" r="5" fill="#10b981"/>
+    <text x="-148" y="5" fill="#f43f5e" font-size="12" font-weight="800" letter-spacing="2">ZERO-SERVER WEB AUDIO CONTROLLER</text>
+  </g>
+
+  <!-- Main Logo Heading -->
+  <g transform="translate(600, 210)" filter="url(#dropShadow)" text-anchor="middle">
+    <text font-size="88" font-weight="900" letter-spacing="-2" fill="#ffffff">
+      Browser<tspan fill="url(#textGrad)">DJ</tspan>
+    </text>
+    <rect x="225" y="-78" width="60" height="28" rx="6" fill="#BC0202"/>
+    <text x="255" y="-59" fill="#ffffff" font-size="13" font-weight="900" font-family="monospace">PRO</text>
+  </g>
+
+  <!-- Subheading -->
+  <text x="600" y="275" text-anchor="middle" fill="#d4d4d8" font-size="25" font-weight="600" letter-spacing="0.5">
+    Professional Zero-Server DJ Controller in Your Web Browser
+  </text>
+
+  <!-- Waveform Equalizer Graphic in Center -->
+  <g transform="translate(360, 330)">
+    <rect x="0" y="25" width="10" height="30" rx="4" fill="#830000"/>
+    <rect x="18" y="10" width="10" height="60" rx="4" fill="#BC0202"/>
+    <rect x="36" y="18" width="10" height="44" rx="4" fill="#BC0202"/>
+    <rect x="54" y="5" width="10" height="70" rx="4" fill="#FF0000"/>
+    <rect x="72" y="20" width="10" height="40" rx="4" fill="#BC0202"/>
+    <rect x="90" y="0" width="10" height="80" rx="4" fill="#FF0000"/>
+    <rect x="108" y="15" width="10" height="50" rx="4" fill="#BC0202"/>
+    <rect x="126" y="8" width="10" height="64" rx="4" fill="#FF0000"/>
+    <rect x="144" y="22" width="10" height="36" rx="4" fill="#830000"/>
+    <rect x="162" y="4" width="10" height="72" rx="4" fill="#FF0000"/>
+    <rect x="180" y="12" width="10" height="56" rx="4" fill="#BC0202"/>
+    <rect x="198" y="0" width="10" height="80" rx="4" fill="#FF0000"/>
+    <rect x="216" y="2" width="10" height="76" rx="4" fill="#FF0000"/>
+    <rect x="234" y="16" width="10" height="48" rx="4" fill="#BC0202"/>
+    <rect x="252" y="6" width="10" height="68" rx="4" fill="#FF0000"/>
+    <rect x="270" y="20" width="10" height="40" rx="4" fill="#BC0202"/>
+    <rect x="288" y="10" width="10" height="60" rx="4" fill="#BC0202"/>
+    <rect x="306" y="0" width="10" height="80" rx="4" fill="#FF0000"/>
+    <rect x="324" y="14" width="10" height="52" rx="4" fill="#BC0202"/>
+    <rect x="342" y="8" width="10" height="64" rx="4" fill="#FF0000"/>
+    <rect x="360" y="22" width="10" height="36" rx="4" fill="#830000"/>
+    <rect x="378" y="6" width="10" height="68" rx="4" fill="#FF0000"/>
+    <rect x="396" y="18" width="10" height="44" rx="4" fill="#BC0202"/>
+    <rect x="414" y="10" width="10" height="60" rx="4" fill="#BC0202"/>
+    <rect x="432" y="22" width="10" height="36" rx="4" fill="#830000"/>
+    <rect x="450" y="8" width="10" height="64" rx="4" fill="#FF0000"/>
+    <rect x="468" y="25" width="10" height="30" rx="4" fill="#830000"/>
+  </g>
+
+  <!-- Feature Badges -->
+  <g transform="translate(600, 465)" text-anchor="middle">
+    <!-- Pill 1: Dual Decks -->
+    <rect x="-375" y="-16" width="125" height="32" rx="8" fill="#18181b" stroke="#3f3f46"/>
+    <text x="-312" y="5" fill="#ffffff" font-size="13" font-weight="700">🎧 Dual Decks</text>
+
+    <!-- Pill 2: 5s AutoMIX -->
+    <rect x="-230" y="-16" width="130" height="32" rx="8" fill="#18181b" stroke="#3f3f46"/>
+    <text x="-165" y="5" fill="#ffffff" font-size="13" font-weight="700">⚡ 5s AutoMIX</text>
+
+    <!-- Pill 3: 3-Band EQ -->
+    <rect x="-80" y="-16" width="160" height="32" rx="8" fill="#18181b" stroke="#3f3f46"/>
+    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="700">🎚️ Studio 3-Band EQ</text>
+
+    <!-- Pill 4: Vinyl Scratch -->
+    <rect x="100" y="-16" width="135" height="32" rx="8" fill="#18181b" stroke="#3f3f46"/>
+    <text x="167" y="5" fill="#ffffff" font-size="13" font-weight="700">💽 Vinyl Scratch</text>
+
+    <!-- Pill 5: Zero Upload -->
+    <rect x="255" y="-16" width="125" height="32" rx="8" fill="#18181b" stroke="#3f3f46"/>
+    <text x="317" y="5" fill="#ffffff" font-size="13" font-weight="700">🔒 Zero Upload</text>
+  </g>
+
+  <!-- Bottom URL & Tagline -->
+  <text x="600" y="545" text-anchor="middle" fill="#a1a1aa" font-size="14" font-weight="600" font-family="monospace" letter-spacing="1">
+    https://browser-dj.github.io • 100% Client-Side Web Audio API
+  </text>
+</svg>
+`;
+
+// Also save SVG format
+fs.writeFileSync(path.join(__dirname, '..', 'public', 'og-image.svg'), svg.trim());
+
+// Render to high-quality 1200x630 PNG
+sharp(Buffer.from(svg))
+  .png({ quality: 95 })
+  .toFile(path.join(__dirname, '..', 'public', 'og-image.png'))
+  .then(() => {
+    console.log('Successfully generated public/og-image.png and public/og-image.svg');
+  })
+  .catch((err) => {
+    console.error('Sharp error:', err);
+    process.exit(1);
+  });

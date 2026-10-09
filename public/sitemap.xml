@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://browser-dj.github.io/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://browser-dj.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://browser-dj.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://browser-dj.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://browser-dj.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://browser-dj.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://browser-dj.github.io/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://browser-dj.github.io/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://browser-dj.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://browser-dj.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://browser-dj.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://browser-dj.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://browser-dj.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://browser-dj.github.io/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://browser-dj.github.io/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://browser-dj.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://browser-dj.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://browser-dj.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://browser-dj.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://browser-dj.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://browser-dj.github.io/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://browser-dj.github.io/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://browser-dj.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://browser-dj.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://browser-dj.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://browser-dj.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://browser-dj.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://browser-dj.github.io/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://browser-dj.github.io/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://browser-dj.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://browser-dj.github.io/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://browser-dj.github.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://browser-dj.github.io/pt/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://browser-dj.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://browser-dj.github.io/"/>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

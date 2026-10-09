@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { DJBoard } from '../../components/DJBoard';
+import { translations } from '../../i18n/translations';
+import { ShieldCheck, Cpu, Sparkles, Smartphone } from 'lucide-react';
+
+const locale = 'de';
+const t = translations[locale];
+---
+
+<BaseLayout locale={locale}>
+  <section class="relative pt-6 pb-4 sm:pt-10 sm:pb-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Semantic SEO Breadcrumbs Navigation -->
+      <nav aria-label="Breadcrumb" class="flex items-center justify-center mb-3">
+        <ol class="inline-flex items-center gap-1.5 text-[11px] font-mono text-slate-500 dark:text-neutral-400">
+          <li class="inline-flex items-center">
+            <a href="/" class="hover:text-bright-crimson dark:hover:text-pure-red transition">Home</a>
+          </li>
+          <li class="text-neutral-400 dark:text-neutral-600">/</li>
+          <li class="text-slate-800 dark:text-neutral-200 font-semibold" aria-current="page">DJ-Controller (DE)</li>
+        </ol>
+      </nav>
+
+      <div class="flex items-center justify-center mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bright-crimson/10 dark:bg-pure-red/15 border border-bright-crimson/30 dark:border-pure-red/30 text-bright-crimson dark:text-pure-red text-xs font-bold tracking-wide shadow-sm">
+          <Sparkles class="w-3.5 h-3.5" />
+          <span>{t.hero.badge}</span>
+        </div>
+      </div>
+
+      <div class="text-center max-w-3xl mx-auto mb-6">
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight mb-3">
+          Browser<span class="text-bright-crimson dark:text-pure-red">DJ</span> — Professioneller Zero-Server Web-DJ-Controller
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed max-w-2xl mx-auto">
+          {t.hero.subheading}
+        </p>
+      </div>
+
+      <div id="dj-board" class="w-full mb-12 scroll-mt-24">
+        <DJBoard client:load t={t} />
+      </div>
+
+      <section class="py-12 border-t border-slate-200 dark:border-neutral-900">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+            {t.seoFeatures.title}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-neutral-400 mt-2 max-w-xl mx-auto">
+            High-Performance Web Audio API Architektur für DJs und Musikproduzenten.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-deep-crimson/20 text-bright-crimson dark:text-pure-red flex items-center justify-center mb-4">
+              <ShieldCheck class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.zeroServerTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.zeroServerDesc}
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-bright-crimson/20 text-bright-crimson dark:text-pure-red flex items-center justify-center mb-4">
+              <Cpu class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.audioEngineTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.audioEngineDesc}
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-pure-red/20 text-pure-red flex items-center justify-center mb-4">
+              <Sparkles class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.autoMixTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.autoMixDesc}
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-neutral-800 text-neutral-200 flex items-center justify-center mb-4">
+              <Smartphone class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.proTouchTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.proTouchDesc}
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

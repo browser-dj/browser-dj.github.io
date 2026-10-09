@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { DJBoard } from '../components/DJBoard';
+import { translations } from '../i18n/translations';
+import { ShieldCheck, Cpu, Sparkles, Smartphone, Music, CheckCircle2 } from 'lucide-react';
+
+const locale = 'en';
+const t = translations[locale];
+---
+
+<BaseLayout locale={locale}>
+  <!-- Hero Section -->
+  <section class="relative pt-6 pb-4 sm:pt-10 sm:pb-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Semantic SEO Breadcrumbs Navigation -->
+      <nav aria-label="Breadcrumb" class="flex items-center justify-center mb-3">
+        <ol class="inline-flex items-center gap-1.5 text-[11px] font-mono text-slate-500 dark:text-neutral-400">
+          <li class="inline-flex items-center">
+            <a href="/" class="hover:text-bright-crimson dark:hover:text-pure-red transition">Home</a>
+          </li>
+          <li class="text-neutral-400 dark:text-neutral-600">/</li>
+          <li class="text-slate-800 dark:text-neutral-200 font-semibold" aria-current="page">Web DJ Controller</li>
+        </ol>
+      </nav>
+
+      <!-- Top Badge -->
+      <div class="flex items-center justify-center mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bright-crimson/10 dark:bg-pure-red/15 border border-bright-crimson/30 dark:border-pure-red/30 text-bright-crimson dark:text-pure-red text-xs font-bold tracking-wide shadow-sm">
+          <Sparkles class="w-3.5 h-3.5" />
+          <span>{t.hero.badge}</span>
+        </div>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="text-center max-w-3xl mx-auto mb-6">
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight mb-3">
+          Browser<span class="text-bright-crimson dark:text-pure-red">DJ</span> — Pro Zero-Server Web DJ Controller
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed max-w-2xl mx-auto">
+          {t.hero.subheading}
+        </p>
+      </div>
+
+      <!-- Main DJ Board React Island -->
+      <div id="dj-board" class="w-full mb-12 scroll-mt-24">
+        <DJBoard client:load t={t} />
+      </div>
+
+      <!-- Technical SEO Feature Grid -->
+      <section class="py-12 border-t border-slate-200 dark:border-neutral-900">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+            {t.seoFeatures.title}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-neutral-400 mt-2 max-w-xl mx-auto">
+            High-performance Web Audio API engine engineered for DJs, producers, and audio enthusiasts.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Card 1: Zero Server */}
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-deep-crimson/20 text-bright-crimson dark:text-pure-red flex items-center justify-center mb-4">
+              <ShieldCheck class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.zeroServerTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.zeroServerDesc}
+            </p>
+          </div>
+
+          {/* Card 2: Audio Engine */}
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-bright-crimson/20 text-bright-crimson dark:text-pure-red flex items-center justify-center mb-4">
+              <Cpu class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.audioEngineTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.audioEngineDesc}
+            </p>
+          </div>
+
+          {/* Card 3: AutoMIX */}
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-pure-red/20 text-pure-red flex items-center justify-center mb-4">
+              <Sparkles class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.autoMixTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.autoMixDesc}
+            </p>
+          </div>
+
+          {/* Card 4: Touch & Responsive */}
+          <div class="p-6 rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 shadow-sm hover:border-bright-crimson/40 transition">
+            <div class="w-10 h-10 rounded-xl bg-neutral-800 text-neutral-200 flex items-center justify-center mb-4">
+              <Smartphone class="w-5 h-5" />
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+              {t.seoFeatures.proTouchTitle}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+              {t.seoFeatures.proTouchDesc}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Guide & SEO Q&A Section -->
+      <section class="py-12 border-t border-slate-200 dark:border-neutral-900">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-6">
+            Pro DJ Controller Reference & Audio Specifications
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-600 dark:text-neutral-300">
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-neutral-100 flex items-center gap-2">
+                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+                How does the 5-Second AutoMIX work?
+              </h3>
+              <p class="leading-relaxed">
+                The BrowserDJ AutoMIX engine uses a 60fps <code class="bg-slate-200 dark:bg-neutral-800 px-1 py-0.5 rounded text-[11px]">requestAnimationFrame</code> loop that applies a constant-power cosine crossfade curve over exactly 5,000 milliseconds. When triggered, it analyzes which deck is currently dominant, smoothly ramps the crossfader, and automatically starts playback on the target incoming track.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-neutral-100 flex items-center gap-2">
+                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+                How are local MP3 and WAV files processed?
+              </h3>
+              <p class="leading-relaxed">
+                Audio files are ingested purely through the standard W3C HTML5 File API and decoded into native <code class="bg-slate-200 dark:bg-neutral-800 px-1 py-0.5 rounded text-[11px]">AudioBuffer</code> memory via the Web Audio API. No bytes are sent to any remote server or cloud bucket, giving you total data privacy, zero latency, and offline mixing capabilities.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-neutral-100 flex items-center gap-2">
+                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+                Studio 3-Band Equalizer Specifications
+              </h3>
+              <p class="leading-relaxed">
+                Our mixer features studio biquad filters: Low Shelf (320 Hz), Peaking Mid (1,000 Hz, Q 1.0), and High Shelf (3,200 Hz). Each band supports seamless attenuation from a -30 dB deep kill down to +6 dB punch boost, complete with instant one-click KILL switches.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-neutral-100 flex items-center gap-2">
+                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+                Zero-Lag Vinyl Jog Wheel Emulation
+              </h3>
+              <p class="leading-relaxed">
+                The interactive vinyl turntables track pointer and touch physics in real time. Dragging clockwise or counter-clockwise modulates the buffer playback position, allowing natural backspins, micro-nudges for beatmatching, and tactile live performance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</BaseLayout>

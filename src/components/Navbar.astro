@@ -1,0 +1,195 @@
+---
+import { Disc3, Globe, Sun, Moon, Coffee } from 'lucide-react';
+import type { Locale } from '../i18n/translations';
+
+interface Props {
+  currentLocale: Locale;
+  tNav: {
+    decks: string;
+    mixer: string;
+    playlist: string;
+    support: string;
+    supportTooltip: string;
+    themeLight: string;
+    themeDark: string;
+    language: string;
+  };
+}
+
+const { currentLocale, tNav } = Astro.props;
+
+const locales: { code: Locale; name: string; flag: string; path: string }[] = [
+  { code: 'en', name: 'English', flag: '🇺🇸', path: '/' },
+  { code: 'es', name: 'Español', flag: '🇪🇸', path: '/es/' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷', path: '/fr/' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹', path: '/pt/' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪', path: '/de/' },
+];
+
+const currentLocaleData = locales.find((l) => l.code === currentLocale) || locales[0];
+---
+
+<header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/90 dark:bg-pitch-black/90 border-b border-slate-200 dark:border-neutral-800 transition-colors duration-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+    
+    {/* Left: Brand Logo */}
+    <a href={currentLocaleData.path} class="flex items-center gap-2.5 group shrink-0">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-deep-crimson via-bright-crimson to-pure-red flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,0,0,0.5)] group-hover:scale-105 transition-transform">
+        <Disc3 class="w-5 h-5 sm:w-6 sm:h-6 animate-spin-slow" />
+      </div>
+      <div class="flex flex-col">
+        <div class="flex items-center gap-1.5">
+          <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">
+            Browser<span class="text-bright-crimson dark:text-pure-red">DJ</span>
+          </span>
+          <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-bright-crimson/10 dark:bg-pure-red/20 text-bright-crimson dark:text-pure-red border border-bright-crimson/20 dark:border-pure-red/30 font-bold hidden xs:inline-block">
+            PRO
+          </span>
+        </div>
+        <span class="text-[9px] font-mono text-slate-500 dark:text-neutral-400 -mt-1 hidden lg:block">
+          Zero-Server Web DJ Controller
+        </span>
+      </div>
+    </a>
+
+    {/* Center Quick Navigation (Desktop only) */}
+    <nav class="hidden lg:flex items-center gap-6 text-xs font-bold tracking-wider text-slate-600 dark:text-neutral-300">
+      <a href="#dj-decks" class="hover:text-bright-crimson dark:hover:text-pure-red transition cursor-pointer">
+        {tNav.decks}
+      </a>
+      <a href="#dj-mixer" class="hover:text-bright-crimson dark:hover:text-pure-red transition cursor-pointer">
+        {tNav.mixer}
+      </a>
+      <a href="#dj-crate" class="hover:text-bright-crimson dark:hover:text-pure-red transition cursor-pointer">
+        {tNav.playlist}
+      </a>
+    </nav>
+
+    {/* Right Controls: Language Selector, Theme Switcher, BuyMeACoffee CTA */}
+    {/* Tablet/Mobile constraint: Collapse to ICONS ONLY */}
+    <div class="flex items-center gap-1.5 sm:gap-3">
+      
+      {/* Language Selector Dropdown */}
+      <div class="relative group">
+        <button
+          type="button"
+          class="flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-slate-700 dark:text-neutral-200 bg-slate-100 hover:bg-slate-200 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-slate-200 dark:border-neutral-850 dark:border-neutral-800 text-xs font-bold transition active:scale-95"
+          aria-label={tNav.language}
+          title={tNav.language}
+        >
+          <Globe class="w-4 h-4 text-bright-crimson dark:text-pure-red shrink-0" />
+          {/* Flag & code on desktop, only flag/code or icon on mobile */}
+          <span class="hidden sm:inline font-mono">{currentLocaleData.flag} {currentLocaleData.name}</span>
+          <span class="sm:hidden font-mono uppercase text-[10px]">{currentLocale}</span>
+        </button>
+
+        {/* Dropdown Menu */}
+        <div class="absolute right-0 mt-1 w-40 py-1.5 rounded-xl bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
+          {locales.map((loc) => (
+            <a
+              href={loc.path}
+              class={`flex items-center justify-between px-3 py-1.5 text-xs font-medium transition ${
+                loc.code === currentLocale
+                  ? 'bg-bright-crimson/10 dark:bg-pure-red/20 text-bright-crimson dark:text-pure-red font-bold'
+                  : 'text-slate-700 dark:text-neutral-300 hover:bg-slate-100 dark:hover:bg-neutral-800'
+              }`}
+            >
+              <span class="flex items-center gap-2">
+                <span>{loc.flag}</span>
+                <span>{loc.name}</span>
+              </span>
+              <span class="text-[10px] font-mono uppercase opacity-60">{loc.code}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Light / Dark Mode Toggle */}
+      <button
+        type="button"
+        id="theme-toggle"
+        class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-slate-700 dark:text-neutral-200 bg-slate-100 hover:bg-slate-200 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-slate-200 dark:border-neutral-800 transition active:scale-95"
+        aria-label="Toggle Light and Dark Theme"
+        title="Toggle Theme"
+      >
+        <Sun class="w-4 h-4 hidden dark:block text-amber-400" />
+        <Moon class="w-4 h-4 block dark:hidden text-slate-700" />
+      </button>
+
+      {/* Support Developer CTA Button */}
+      {/* On desktop: Full text label with icon. On tablet/mobile: ICON ONLY! */}
+      <a
+        href="https://buymeacoffee.com/kisharadilz"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-deep-crimson via-bright-crimson to-pure-red hover:brightness-110 active:scale-95 text-white font-black text-xs tracking-wider shadow-[0_0_15px_rgba(188,2,2,0.4)] transition shrink-0"
+        title={tNav.supportTooltip}
+        aria-label={tNav.support}
+      >
+        <Coffee class="w-4 h-4" />
+        <span class="hidden lg:inline">{tNav.support}</span>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  function applyTheme() {
+    const isDark = 
+      localStorage.theme === 'dark' || 
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    }
+  });
+
+  applyTheme();
+
+  // Smooth Scroll & Hash Navigation for Desktop Navbar Links
+  function initNavScroll() {
+    const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const hash = link.getAttribute('href');
+        if (!hash || hash === '#') return;
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Highlight target element briefly with subtle crimson focus
+          target.classList.add('ring-2', 'ring-bright-crimson', 'ring-offset-2', 'ring-offset-pitch-black');
+          setTimeout(() => {
+            target.classList.remove('ring-2', 'ring-bright-crimson', 'ring-offset-2', 'ring-offset-pitch-black');
+          }, 1200);
+          try {
+            history.pushState(null, '', hash);
+          } catch (_) {}
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavScroll);
+  } else {
+    initNavScroll();
+  }
+</script>

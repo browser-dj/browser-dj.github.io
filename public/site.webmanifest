@@ -1,0 +1,19 @@
+{
+  "name": "BrowserDJ | Pro Zero-Server Web DJ Controller",
+  "short_name": "BrowserDJ",
+  "description": "Professional 100% client-side web DJ application powered by Web Audio API.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape-primary",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "categories": ["music", "multimedia", "utilities"],
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

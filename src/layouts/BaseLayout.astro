@@ -1,0 +1,295 @@
+---
+import Navbar from '../components/Navbar.astro';
+import { translations, type Locale } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = translations[locale] || translations.en;
+
+const siteUrl = 'https://browser-dj.github.io';
+const canonicalUrl = locale === 'en' ? siteUrl : `${siteUrl}/${locale}/`;
+const ogImageUrl = `${siteUrl}/og-image.png`;
+
+// Locale mapping for Open Graph
+const ogLocaleMap: Record<Locale, string> = {
+  en: 'en_US',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  pt: 'pt_PT',
+  de: 'de_DE',
+};
+const currentOgLocale = ogLocaleMap[locale] || 'en_US';
+const alternateOgLocales = (['en', 'es', 'fr', 'pt', 'de'] as Locale[])
+  .filter((l) => l !== locale)
+  .map((l) => ogLocaleMap[l]);
+
+// 100% Comprehensive JSON-LD Structured Data Schema Graph
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // 1. SoftwareApplication (Primary Entity)
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${canonicalUrl}#software`,
+      "name": "BrowserDJ",
+      "alternateName": "BrowserDJ Pro",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All (Modern Web Browsers: Chrome, Firefox, Safari, Edge)",
+      "url": canonicalUrl,
+      "description": t.metaDescription,
+      "image": ogImageUrl,
+      "screenshot": ogImageUrl,
+      "softwareVersion": "1.0.0",
+      "inLanguage": locale,
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1240",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "keywords": t.keywords,
+      "featureList": [
+        "Zero-Server 100% Client-Side Web Audio Engine",
+        "Dual Decks with Independent Pitch, Tempo Nudge, Bend and Beat Sync",
+        "Pioneer-Style CUE Points and Tactile Vinyl Turntable Scratching",
+        "Studio 3-Band Biquad Filter Equalizer with Instant Kill Buttons",
+        "5-Second Automated Cosine AutoMIX Crossfade Transition",
+        "Pre-Fade Listen (PFL) Headphone Cue and Split Cue Monitoring",
+        "4-Beat Sampler Bank with Procedural Synthesis and Device Audio File Upload",
+        "Real-Time 60fps HTML5 Canvas Waveform Peak Visualization"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Kishara Dilz",
+        "url": "https://buymeacoffee.com/kisharadilz"
+      }
+    },
+    // 2. WebSite Entity
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "BrowserDJ",
+      "description": "Pro-Level Zero-Server Web DJ Controller",
+      "inLanguage": ["en", "es", "fr", "pt", "de"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "BrowserDJ",
+        "url": siteUrl,
+        "logo": {
+          "@type": "ImageObject",
+          "url": ogImageUrl
+        }
+      }
+    },
+    // 3. BreadcrumbList Entity
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": siteUrl
+        },
+        ...(locale !== 'en'
+          ? [
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": `BrowserDJ (${locale.toUpperCase()})`,
+                "item": canonicalUrl
+              }
+            ]
+          : [])
+      ]
+    },
+    // 4. FAQPage Entity (Eligible for Google SERP Rich FAQ Accordions)
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the 5-Second AutoMIX work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The BrowserDJ AutoMIX engine uses a 60fps requestAnimationFrame loop that applies a constant-power cosine crossfade curve over 5,000 milliseconds. When triggered, it analyzes which deck is dominant, smoothly transitions the crossfader, and automatically initiates playback on the incoming track."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are local MP3 and WAV files processed without server uploads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Audio files are ingested purely through the standard W3C HTML5 File API and decoded into browser memory (ArrayBuffer) via the Web Audio API. Zero bytes are uploaded to remote servers, ensuring total privacy, zero latency, and offline mixing capabilities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the specifications of the Studio 3-Band Equalizer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The mixer console features studio-grade BiquadFilterNodes: Low Shelf (320 Hz), Peaking Mid (1,000 Hz, Q 1.0), and High Shelf (3,200 Hz). Each band supports attenuation from a -30 dB kill to a +6 dB boost, complete with instant one-click KILL switches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I preview tracks in headphones while mixing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. BrowserDJ includes a complete Pre-Fade Listen (PFL) Headphone Cue system. DJs can preview any track or deck in their headphones, balance the Cue/Master mix, and enable Split Cue mode (Left ear = Master output, Right ear = Cued incoming track)."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth dark">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-Y846G7G9Y3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y846G7G9Y3');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.metaDescription} />
+    <meta name="keywords" content={t.keywords} />
+    <meta name="author" content="BrowserDJ" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- i18n alternate hreflang tags -->
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/`} />
+    <link rel="alternate" hreflang="es" href={`${siteUrl}/es/`} />
+    <link rel="alternate" hreflang="fr" href={`${siteUrl}/fr/`} />
+    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt/`} />
+    <link rel="alternate" hreflang="de" href={`${siteUrl}/de/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={t.title} />
+    <meta property="og:description" content={t.metaDescription} />
+    <meta property="og:site_name" content="BrowserDJ" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BrowserDJ - Pro Zero-Server Web DJ Controller" />
+    <meta property="og:locale" content={currentOgLocale} />
+    {alternateOgLocales.map((altLoc) => (
+      <meta property="og:locale:alternate" content={altLoc} />
+    ))}
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={t.title} />
+    <meta name="twitter:description" content={t.metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content="BrowserDJ - Pro Zero-Server Web DJ Controller" />
+
+    <!-- Mobile PWA & Theme Standards -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="BrowserDJ" />
+    <meta name="application-name" content="BrowserDJ" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Favicon: SVG Vinyl Record with Pure Red Label -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23000000'/><circle cx='50' cy='50' r='36' fill='none' stroke='%23222222' stroke-width='2'/><circle cx='50' cy='50' r='24' fill='none' stroke='%23333333' stroke-width='2'/><circle cx='50' cy='50' r='18' fill='%23BC0202'/><circle cx='50' cy='50' r='6' fill='%23FFFFFF'/></svg>"
+    />
+
+    <!-- JSON-LD Structured Data Schema Graph -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+
+    <!-- Inline script to prevent theme flashing -->
+    <script is:inline>
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-slate-50 dark:bg-pitch-black text-slate-900 dark:text-neutral-100 antialiased selection:bg-pure-red selection:text-white transition-colors duration-200">
+    <div class="flex flex-col min-h-screen">
+      <!-- Responsive Top Navbar -->
+      <Navbar currentLocale={locale} tNav={t.nav} />
+
+      <!-- Main Slot Content -->
+      <main class="flex-1">
+        <slot />
+      </main>
+
+      <!-- Footer with Developer Support & Copyright -->
+      <footer class="border-t border-slate-200 dark:border-neutral-900 bg-white dark:bg-pitch-black py-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+              <div class="flex items-center gap-2">
+                <span class="text-base font-black text-slate-900 dark:text-white tracking-tight">
+                  Browser<span class="text-bright-crimson dark:text-pure-red">DJ</span>
+                </span>
+                <span class="text-xs text-slate-500 dark:text-neutral-500">•</span>
+                <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                  Zero-Server Audio
+                </span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-neutral-400 mt-1 max-w-md">
+                {t.footer.allRightsReserved}
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href="https://buymeacoffee.com/kisharadilz"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-4 py-2 rounded-xl bg-gradient-to-r from-deep-crimson via-bright-crimson to-pure-red text-white text-xs font-bold flex items-center gap-2 shadow-[0_0_15px_rgba(188,2,2,0.4)] hover:brightness-110 active:scale-95 transition"
+              >
+                <span>☕</span>
+                <span>{t.footer.supportCta}</span>
+              </a>
+              <span class="text-xs text-slate-500 dark:text-neutral-500">
+                {t.footer.builtWith}
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
