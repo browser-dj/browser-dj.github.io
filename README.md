@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-browser--dj.github.io-BC0202?style=for-the-badge&logo=googlechrome&logoColor=white)](https://browser-dj.github.io)
-[![Buy Me A Coffee](https://img.shields.io/badge/Support-Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/kisharadilz)
+[![Support on Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/kishara)
 [![SEO Audit](https://img.shields.io/badge/SEO%20Score-100%25-10b981?style=for-the-badge&logo=google&logoColor=white)](https://browser-dj.github.io)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Zero--Server-blue?style=for-the-badge&logo=shield&logoColor=white)](https://browser-dj.github.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](LICENSE)
@@ -300,7 +300,7 @@ Astro statically builds all 5 language endpoints into standard static HTML files
 
 BrowserDJ is 100% free, open-source, and zero-server. If you love mixing with BrowserDJ or use it for your sets, please consider supporting ongoing development:
 
-👉 **[Buy Me A Coffee — buymeacoffee.com/kisharadilz](https://buymeacoffee.com/kisharadilz)**
+👉 **[Support on Ko-fi — ko-fi.com/kishara](https://ko-fi.com/kishara)**
 
 Your support helps fund future DJ features, beat analysis algorithms, and performance improvements!
 
